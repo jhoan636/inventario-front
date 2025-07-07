@@ -12,8 +12,8 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserModule,
     HttpClientModule,           
     RouterModule.forRoot(routes),
-    BrowserAnimationsModule,       // necesario
-    ToastrModule.forRoot({         // configuración global
+    BrowserAnimationsModule,      
+    ToastrModule.forRoot({       
       timeOut: 3000,
       positionClass: 'toast-botton-right',
       preventDuplicates: true,

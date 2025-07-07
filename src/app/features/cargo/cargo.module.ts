@@ -9,17 +9,14 @@ import { CargoFormComponent }  from './cargo-form/cargo-form.component';
 
 @NgModule({
   imports: [
-    // Módulos necesitados
     CommonModule,
     ReactiveFormsModule,
 
-    // Rutas hijas
     RouterModule.forChild([
       { path: '',      component: CargoListComponent },
       { path: 'nuevo', component: CargoFormComponent }
     ]),
 
-    // Componentes standalone
     CargoListComponent,
     CargoFormComponent
   ]

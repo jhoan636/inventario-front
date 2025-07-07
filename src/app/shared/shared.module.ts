@@ -10,9 +10,6 @@ import { MatTableModule } from "@angular/material/table";
     
 // shared.module.ts
 @NgModule({
-  declarations: [
-    // Pipes, Components (ej. ConfirmDialogComponent)
-  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -15,6 +15,6 @@ export const routes: Routes = [
       import('./features/mercancia/mercancia.module').then((m) => m.MercanciaModule),
   },
 
-  // si cae en cualquier otra ruta
+
   { path: '**', redirectTo: '' },
 ];

@@ -90,7 +90,7 @@ export class MercanciaFormComponent implements OnInit {
   onSubmit(): void {
     if (this.form.invalid) return;
     this.loading = true;
-    const payload = this.form.value; // contiene usuarioRegistroId
+    const payload = this.form.value; 
 
     const obs = this.id
       ? this.mercanciaService.actualizarMercancia(this.id, payload)
