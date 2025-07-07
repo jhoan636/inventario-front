@@ -1,0 +1,101 @@
+.cargo-form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #e1e8ed;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.form-header {
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #444;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccd6dd;
+  border-radius: 4px;
+  transition: border-color 0.2s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #1da1f2;
+}
+
+.is-invalid {
+  border-color: #e0245e;
+}
+
+.invalid-feedback {
+  margin-top: 4px;
+  font-size: 0.875rem;
+  color: #e0245e;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn {
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #1da1f2;
+  color: #fff;
+}
+
+.btn-primary:disabled {
+  background-color: #a3d3f5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: #657786;
+  color: #fff;
+}
+
+.btn-secondary:disabled {
+  background-color: #b0b8bf;
+  cursor: not-allowed;
+}
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.6);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

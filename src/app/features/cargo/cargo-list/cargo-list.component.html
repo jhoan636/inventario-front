@@ -1,0 +1,42 @@
+<div class="cargo-list-container">
+  <div class="header">
+    <h2>Gestión de Cargos</h2>
+    <button class="btn btn-primary" routerLink="nuevo">
+      <i class="icon-plus"></i>
+      Nuevo Cargo
+    </button>
+  </div>
+
+
+  <div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Cargando cargos...</p>
+  </div>
+
+  <ng-container *ngIf="!loading">
+    <table class="data-table" *ngIf="cargos.length > 0; else emptyState">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cargo of cargos">
+          <td>{{ cargo.id }}</td>
+          <td>{{ cargo.nombre }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #emptyState>
+      <div class="empty-state">
+        <i class="icon-empty"></i>
+        <h3>No hay cargos registrados</h3>
+        <button class="btn btn-primary" routerLink="nuevo">
+          Crear Cargo
+        </button>
+      </div>
+    </ng-template>
+  </ng-container>
+</div>
