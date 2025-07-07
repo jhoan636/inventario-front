@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Cargo } from '../models/cargo.model';
+import { ApiError } from '../models/apiError.model';
 
 @Injectable({ providedIn: 'root' })
 export class CargoService {
@@ -10,11 +11,21 @@ export class CargoService {
   constructor(private http: HttpClient) {}
 
   obtenerTodosLosCargos(): Observable<Cargo[]> {
-    return this.http.get<Cargo[]>(`${this.apiUrl}`);
+    return this.http.get<Cargo[]>(`${this.apiUrl}`).pipe(
+      catchError((err: HttpErrorResponse) => {
+        const apiErr: ApiError = err.error;    
+        return throwError(() => apiErr);
+      })
+    );
   }
 
   crearCargo(nombreCargo: string): Observable<Cargo> {
     const payload = { nombre: nombreCargo };
-    return this.http.post<Cargo>(`${this.apiUrl}`, payload);
+    return this.http.post<Cargo>(`${this.apiUrl}`, payload).pipe(
+      catchError((err: HttpErrorResponse) => {
+        const apiErr: ApiError = err.error;    
+        return throwError(() => apiErr);
+      })
+    );
   }
 }

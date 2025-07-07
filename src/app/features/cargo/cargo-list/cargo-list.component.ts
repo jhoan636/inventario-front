@@ -8,11 +8,13 @@ import { CargoService } from '../../../core/Services/cargo.service';
 import { Cargo } from '../../../core/models/cargo.model';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ApiError } from '@app/core/models/apiError.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cargo-list',
   templateUrl: './cargo-list.component.html',
-  standalone: true, 
+  standalone: true,
   imports: [CommonModule, RouterModule],
   styleUrls: ['./cargo-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,7 +25,8 @@ export class CargoListComponent implements OnInit {
 
   constructor(
     private cargoService: CargoService,
-    private cdr: ChangeDetectorRef // ← inyectamos el detector
+    private cdr: ChangeDetectorRef,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -36,12 +39,12 @@ export class CargoListComponent implements OnInit {
       next: (data) => {
         this.cargos = data;
         this.loading = false;
-        this.cdr.markForCheck(); 
+        this.cdr.markForCheck();
       },
-      error: () => {
+      error: (err: ApiError) => {
         this.loading = false;
-        console.log('Error al cargar los cargos');
-        this.cdr.markForCheck(); 
+        this.cdr.markForCheck();
+        this.toastr.error(err.message);
       },
     });
   }

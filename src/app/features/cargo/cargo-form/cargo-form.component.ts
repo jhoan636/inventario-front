@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { CargoService } from '../../../core/Services/cargo.service';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+import { ApiError } from '@app/core/models/apiError.model';
 
 @Component({
   selector: 'app-cargo-form',
@@ -20,7 +22,12 @@ export class CargoFormComponent implements OnInit {
   form: FormGroup;
   loading = false;
 
-  constructor(private fb: FormBuilder, private cargoService: CargoService) {
+  constructor(
+    private fb: FormBuilder,
+    private cargoService: CargoService,
+    private toastr: ToastrService,
+    private cdr: ChangeDetectorRef
+  ) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
     });
@@ -40,10 +47,13 @@ export class CargoFormComponent implements OnInit {
       next: () => {
         this.form.reset();
         this.loading = false;
+        this.toastr.success('Cargo creado exitosamente', 'Éxito');
+         this.cdr.markForCheck(); 
       },
-      error: () => {
-        console.log('Error al crear el cargo');
+      error: (err: ApiError) => {
+        this.toastr.error(err.message,);
         this.loading = false;
+        this.cdr.markForCheck();
       },
     });
   }
