@@ -2,14 +2,19 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  // redirige root a cargos
-  { path: '',        redirectTo: 'cargos', pathMatch: 'full' },
+  { path: '', redirectTo: '/mercancias', pathMatch: 'full' },
 
-  { path: 'cargos',
+  {
+    path: 'cargos',
     loadChildren: () =>
-      import('./features/cargo/cargo.module').then(m => m.CargoModule)
+      import('./features/cargo/cargo.module').then((m) => m.CargoModule),
+  },
+  {
+    path: 'mercancias',
+    loadChildren: () =>
+      import('./features/mercancia/mercancia.module').then((m) => m.MercanciaModule),
   },
 
   // si cae en cualquier otra ruta
-  { path: '**',      redirectTo: '' }
+  { path: '**', redirectTo: '' },
 ];

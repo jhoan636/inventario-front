@@ -1,0 +1,47 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="mercancia-form-container">
+  <h2>{{ id ? 'Editar' : 'Crear' }} Mercancía</h2>
+
+  <label>
+    Nombre:
+    <input formControlName="nombre" placeholder="Nombre" />
+  </label>
+  <div *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched" class="error">
+    Nombre es requerido.
+  </div>
+
+  <label>
+    Cantidad:
+    <input type="number" formControlName="cantidad" min="1" />
+  </label>
+  <div *ngIf="form.get('cantidad')?.invalid && form.get('cantidad')?.touched" class="error">
+    Cantidad debe ser al menos 1.
+  </div>
+
+  <label>
+    Fecha Ingreso:
+    <input type="date" formControlName="fechaIngreso" />
+  </label>
+  <div *ngIf="form.get('fechaIngreso')?.invalid && form.get('fechaIngreso')?.touched" class="error">
+    Fecha es requerida.
+  </div>
+
+  <label>
+    Usuario Registro:
+    <select formControlName="usuarioRegistroId">
+      <option [value]="null">-- Seleccione usuario --</option>
+      <option *ngFor="let u of usuarios" [value]="u.id">{{ u.nombre }}</option>
+    </select>
+  </label>
+  <div *ngIf="form.get('usuarioRegistroId')?.invalid && form.get('usuarioRegistroId')?.touched" class="error">
+    Debe seleccionar un usuario.
+  </div>
+
+  <div class="buttons">
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid || loading">
+      {{ id ? 'Actualizar' : 'Guardar' }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="router.navigate(['/mercancias'])">
+      Cancelar
+    </button>
+  </div>
+</form>
